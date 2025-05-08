@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Copy, Eye, EyeOff, Edit, Trash2 } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 /**
  * @typedef {Object} PasswordItem
@@ -14,17 +15,57 @@ import { Copy, Eye, EyeOff, Edit, Trash2 } from 'lucide-react';
  * @property {string} lastUpdated
  */
 
-
+const PasswordCard = ({ password, onEdit, onDelete }) => {
+  const [showPassword, setShowPassword] = useState(false);
+  
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+  
+  const copyToClipboard = (text, label = 'Copied!') => {
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        toast.success(label, {
+          icon: '📋',
+          style: {
+            borderRadius: '8px',
+            background: '#1a1a1a',
+            color: '#fff',
+          },
+        });
+      })
+      .catch(() => {
+        toast.error('Failed to copy!', {
+          style: {
+            borderRadius: '8px',
+            background: '#b91c1c',
+            color: '#fff',
+          },
+        });
+      });
+  };
+  
+  const renderPassword = () => {
+    return showPassword ? password.password : '•'.repeat(Math.min(8, password.password.length));
+  };
 
   return (
     <div className="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-shadow">
       <div className="flex justify-between items-start mb-2">
         <h3 className="font-medium text-gray-900">{password.title}</h3>
         <div className="flex space-x-1">
-          <button className="p-1 rounded-md hover:bg-gray-100" title="Edit">
+          <button 
+            className="p-1 rounded-md hover:bg-gray-100" 
+            title="Edit"
+            onClick={() => onEdit(password)}
+          >
             <Edit className="h-4 w-4 text-gray-500" />
           </button>
-          <button className="p-1 rounded-md hover:bg-gray-100" title="Delete">
+          <button 
+            className="p-1 rounded-md hover:bg-gray-100" 
+            title="Delete"
+            onClick={() => onDelete(password.id)}
+          >
             <Trash2 className="h-4 w-4 text-gray-500" />
           </button>
         </div>
@@ -43,7 +84,7 @@ import { Copy, Eye, EyeOff, Edit, Trash2 } from 'lucide-react';
             <button 
               className="p-1 rounded-md hover:bg-gray-100" 
               title="Copy username"
-              onClick={() => copyToClipboard(password.username)}
+              onClick={() => copyToClipboard(password.username, 'Username copied!')}
             >
               <Copy className="h-4 w-4 text-gray-500" />
             </button>
@@ -69,7 +110,7 @@ import { Copy, Eye, EyeOff, Edit, Trash2 } from 'lucide-react';
               <button 
                 className="p-1 rounded-md hover:bg-gray-100" 
                 title="Copy password"
-                onClick={() => copyToClipboard(password.password)}
+                onClick={() => copyToClipboard(password.password, 'Password copied!')}
               >
                 <Copy className="h-4 w-4 text-gray-500" />
               </button>
@@ -90,5 +131,6 @@ import { Copy, Eye, EyeOff, Edit, Trash2 } from 'lucide-react';
       </div>
     </div>
   );
+};
 
 export default PasswordCard;
