@@ -1,14 +1,24 @@
-import React from 'react';
+import React from "react";
+import { Toaster } from 'react-hot-toast';
+import Homepage from "./pages/homepage";
 
 function App() {
-
   return (
-    <div>
-      <h1 className="text-3xl font-bold underline text-center text-blue-500">
-        Hello world!
-      </h1>
+    <>
+    <Toaster 
+        position="top-right"
+        toastOptions={{
+          style: {
+            background: '#333',
+            color: '#fff',
+          },
+        }}
+      />
+    <div className="App">
+      <Homepage />
     </div>
-  )
+    </>
+  );
 }
 
-export default App
+export default App;
