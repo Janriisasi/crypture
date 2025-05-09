@@ -88,7 +88,7 @@ export default function PasswordManager() {
         <div className="mb-8">
           <div className="text-6xl font-bold flex items-center justify-center">
             {/* Replace this with your own image */}
-            <img src="/api/placeholder/220/60" alt="cryptore logo" className="h-16" />
+            <img src="./src/assets/Logo.svg" alt="cryptore logo" className="h-24" />
           </div>
         </div>
 
@@ -104,7 +104,7 @@ export default function PasswordManager() {
 
         {/* Add New Button */}
         <div className="w-full max-w-3xl flex justify-end mb-6">
-          <button className="bg-white p-2 rounded-md border border-gray-300 hover:bg-gray-50">
+          <button className="bg-white p-2 rounded-md border border-gray-300 hover:bg-black hover:text-white transition-colors duration-200 cursor-pointer">
             <Plus size={20} />
           </button>
         </div>
@@ -146,15 +146,15 @@ export default function PasswordManager() {
                   style={{ animation: 'fadeIn 0.2s ease-out' }}
                 >
                   <button 
-                    className="w-full text-left px-4 py-2 text-sm flex items-center gap-2 hover:bg-green-50 hover:text-green-600 transition-colors duration-150"
+                    className="w-full text-left px-4 py-2 text-sm flex items-center gap-2 hover:bg-green-50 hover:text-green-600 transition-colors duration-200 cursor-pointer"
                     onClick={() => togglePin(entry.id)}
                   >
                     <Pin size={14} /> {entry.pinned ? 'Unpin' : 'Pin'}
                   </button>
-                  <button className="w-full text-left px-4 py-2 text-sm flex items-center gap-2 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-150">
+                  <button className="w-full text-left px-4 py-2 text-sm flex items-center gap-2 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200 cursor-pointer">
                     <Edit size={14} /> Edit
                   </button>
-                  <button className="w-full text-left px-4 py-2 text-sm flex items-center gap-2 hover:bg-red-50 hover:text-red-600 transition-colors duration-150">
+                  <button className="w-full text-left px-4 py-2 text-sm flex items-center gap-2 hover:bg-red-50 hover:text-red-600 transition-colors duration-200 cursor-pointer">
                     <Trash2 size={14} /> Delete
                   </button>
                 </div>
@@ -176,12 +176,12 @@ export default function PasswordManager() {
                       <span className="text-gray-600">{entry.password}</span>
                     </div>
                     
-                    <div className="flex space-x-1">
-                      <button className="text-gray-400 hover:text-gray-600">
+                    <div className="flex space-x-2">
+                      <button className="text-gray-400 hover:text-gray-600 cursor-pointer">
                         <Eye size={16} />
                       </button>
                       <button 
-                        className="text-gray-400 hover:text-blue-500 transition-colors duration-150"
+                        className="text-gray-400 hover:text-blue-500 cursor-pointer"
                         onClick={() => copyPassword(entry.password)}
                       >
                         <Copy size={16} />
