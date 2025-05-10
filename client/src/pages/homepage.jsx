@@ -58,6 +58,10 @@ export default function PasswordManager() {
 
   // Toggle pin status
   const togglePin = (id) => {
+    // Get the current entry to determine if we're pinning or unpinning
+    const currentEntry = passwordEntries.find(entry => entry.id === id);
+    const isPinned = currentEntry?.pinned;
+
     setPasswordEntries(entries => 
       entries.map(entry => 
         entry.id === id ? { ...entry, pinned: !entry.pinned } : entry
@@ -65,7 +69,7 @@ export default function PasswordManager() {
     );
     setOpenMenu(null);
     setToast({
-      message: 'Password card pinned successfully!',
+      message: isPinned ? 'Password card unpinned successfully!' : 'Password card pinned successfully!',
       type: 'success'
     });
   };
