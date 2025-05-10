@@ -199,7 +199,7 @@ export default function PasswordManager() {
       {toast && (
         <div 
           className={`fixed bottom-4 right-4 px-4 py-2 rounded-md shadow-lg flex items-center gap-2 ${
-            toast.type === 'success' ? 'bg-green-50 text-green-600 border border-green-200' : 
+            toast.type === 'success' ? 'bg-green-50 text-green-600 border border-green-600' : 
             'bg-red-50 text-red-600 border border-red-200'
           }`}
         >
