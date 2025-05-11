@@ -1,10 +1,17 @@
 import React from 'react';
+import {motion} from 'framer-motion';
 import { useState } from 'react';
 
 export default function Formpage() {
   const [hoveredCard, setHoveredCard] = useState(false);
   
   return (
+	 <motion.div
+      initial={{ y: 30, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: -30, opacity: 0 }}
+      transition={{ duration: 0.4, ease: "easeIn" }}
+    >
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
       <div 
         className={`bg-white rounded-lg p-8 w-full max-w-3xl transition-shadow duration-300 shadow-lg`}
@@ -60,5 +67,6 @@ export default function Formpage() {
         </div>
       </div>
     </div>
+	</motion.div>
   );
 }
