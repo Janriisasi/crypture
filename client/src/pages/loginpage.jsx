@@ -98,18 +98,18 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-black flex items-center">
+    <div className="min-h-screen w-full bg-white flex items-center">
       <div className="flex-1 flex items-center justify-center pl-20">
         <div className="flex items-center">
           <img
-            src="/Logo.svg"
-            alt="HanceAI Logo"
+            src="./src/assets/Logo.svg"
+            alt="Crypture Logo"
             className="h-30 w-auto"
           />
         </div>
       </div>
       <div className="flex-1 flex items-center justify-center pr-20">
-        <div className="w-full max-w-md p-8 rounded-lg border border-purple-600 shadow-lg shadow-purple-600/20 bg-black">
+        <div className="w-full max-w-md p-8 rounded-lg border-2 border-black bg-white">
           {error && (
             <div className="mb-4 p-3 bg-red-900 bg-opacity-30 border border-red-800 text-red-200 rounded">
               {error}
@@ -124,24 +124,24 @@ const Login = () => {
           
           {activeTab === 'login' && (
             <form onSubmit={handleLogin}>
-              <h2 className="text-3xl font-bold text-white text-center mb-8">Login</h2>
+              <h2 className="text-3xl font-bold text-black text-center mb-8">Login</h2>
               <div className="mb-4">
-                <label htmlFor="email" className="block text-white mb-2">Email</label>
+                <label htmlFor="email" className="block text-black mb-2">Email</label>
                 <input
                   type="email"
                   id="email"
-                  className="w-full px-4 py-3 rounded-md bg-white text-black border-none focus:outline-none focus:ring-2 focus:ring-purple-600"
+                  className="w-full px-4 py-3 rounded-md bg-white text-black border border-black focus:outline-none focus:ring-2 focus:ring-black-600"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
               </div>
               <div className="mb-2">
-                <label htmlFor="password" className="block text-white mb-2">Password</label>
+                <label htmlFor="password" className="block text-black mb-2">Password</label>
                 <input
                   type="password"
                   id="password"
-                  className="w-full px-4 py-3 rounded-md bg-white text-black border-none focus:outline-none focus:ring-2 focus:ring-purple-600"
+                  className="w-full px-4 py-3 rounded-md bg-white text-black border border-black focus:outline-none focus:ring-2 focus:ring-black-600"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
@@ -150,7 +150,7 @@ const Login = () => {
               <div className="text-right mb-6">
                 <button
                   type="button"
-                  className="text-purple-600 hover:text-purple-400 transition-colors cursor-pointer"
+                  className="text-black-600 hover:text-gray-700 transition-colors cursor-pointer"
                   onClick={() => {
                     resetMessages();
                     setActiveTab('forgot');
@@ -161,7 +161,7 @@ const Login = () => {
               </div>
               <button
                 type="submit"
-                className="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-md transition-colors whitespace-nowrap cursor-pointer flex justify-center items-center"
+                className="w-full py-3 bg-black hover:bg-gray-800 text-white rounded-md transition-colors whitespace-nowrap cursor-pointer flex justify-center items-center"
                 disabled={isLoading}
               >
                 {isLoading ? (
@@ -169,11 +169,11 @@ const Login = () => {
                 ) : null}
                 Login
               </button>
-              <div className="mt-6 text-center text-white">
+              <div className="mt-6 text-center text-black">
                 Don't have an account?{' '}
                 <button
                   type="button"
-                  className="text-purple-600 hover:text-purple-400 transition-colors cursor-pointer"
+                  className="text-black hover:text-gray-700 transition-colors cursor-pointer"
                   onClick={() => {
                     resetMessages();
                     setActiveTab('signup');
@@ -186,46 +186,46 @@ const Login = () => {
           )}
           {activeTab === 'signup' && (
             <form onSubmit={handleSignup}>
-              <h2 className="text-3xl font-bold text-white text-center mb-8">Sign Up</h2>
+              <h2 className="text-3xl font-bold text-black text-center mb-8">Sign Up</h2>
               <div className="mb-4">
-                <label htmlFor="fullName" className="block text-white mb-2">Full Name</label>
+                <label htmlFor="fullName" className="block text-black mb-2">Full Name</label>
                 <input
                   type="text"
                   id="fullName"
-                  className="w-full px-4 py-3 rounded-md bg-white text-black border-none focus:outline-none focus:ring-2 focus:ring-purple-600"
+                  className="w-full px-4 py-3 rounded-md bg-white text-black border border-black focus:outline-none focus:ring-2 focus:ring-black-600"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   required
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="signupEmail" className="block text-white mb-2">Email</label>
+                <label htmlFor="signupEmail" className="block text-black mb-2">Email</label>
                 <input
                   type="email"
                   id="signupEmail"
-                  className="w-full px-4 py-3 rounded-md bg-white text-black border-none focus:outline-none focus:ring-2 focus:ring-purple-600"
+                  className="w-full px-4 py-3 rounded-md bg-white text-black border border-black focus:outline-none focus:ring-2 focus:ring-black-600"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="signupPassword" className="block text-white mb-2">Password</label>
+                <label htmlFor="signupPassword" className="block text-black mb-2">Password</label>
                 <input
                   type="password"
                   id="signupPassword"
-                  className="w-full px-4 py-3 rounded-md bg-white text-black border-none focus:outline-none focus:ring-2 focus:ring-purple-600"
+                  className="w-full px-4 py-3 rounded-md bg-white text-black border border-black focus:outline-none focus:ring-2 focus:ring-black-600"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
               </div>
               <div className="mb-6">
-                <label htmlFor="confirmPassword" className="block text-white mb-2">Confirm Password</label>
+                <label htmlFor="confirmPassword" className="block text-black mb-2">Confirm Password</label>
                 <input
                   type="password"
                   id="confirmPassword"
-                  className="w-full px-4 py-3 rounded-md bg-white text-black border-none focus:outline-none focus:ring-2 focus:ring-purple-600"
+                  className="w-full px-4 py-3 rounded-md bg-white text-black border border-black focus:outline-none focus:ring-2 focus:ring-black-600"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
@@ -233,7 +233,7 @@ const Login = () => {
               </div>
               <button
                 type="submit"
-                className="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-md transition-colors whitespace-nowrap cursor-pointer flex justify-center items-center"
+                className="w-full py-3 bg-black hover:bg-gray-800 text-white rounded-md transition-colors whitespace-nowrap cursor-pointer flex justify-center items-center"
                 disabled={isLoading}
               >
                 {isLoading ? (
@@ -241,11 +241,11 @@ const Login = () => {
                 ) : null}
                 Sign Up
               </button>
-              <div className="mt-6 text-center text-white">
+              <div className="mt-6 text-center text-black">
                 Already have an account?{' '}
                 <button
                   type="button"
-                  className="text-purple-600 hover:text-purple-400 transition-colors cursor-pointer"
+                  className="text-black hover:text-gray-700 transition-colors cursor-pointer"
                   onClick={() => {
                     resetMessages();
                     setActiveTab('login');
@@ -258,16 +258,16 @@ const Login = () => {
           )}
           {activeTab === 'forgot' && (
             <form onSubmit={handleForgotPassword}>
-              <h2 className="text-3xl font-bold text-white text-center mb-4">Reset Password</h2>
-              <p className="text-white text-center mb-6">
+              <h2 className="text-3xl font-bold text-black text-center mb-4">Reset Password</h2>
+              <p className="text-black text-center mb-6">
                 Enter your email and new password below.
               </p>
               <div className="mb-4">
-                <label htmlFor="recoveryEmail" className="block text-white mb-2">Email</label>
+                <label htmlFor="recoveryEmail" className="block text-black mb-2">Email</label>
                 <input
                   type="email"
                   id="recoveryEmail"
-                  className="w-full px-4 py-3 rounded-md bg-white text-black border-none focus:outline-none focus:ring-2 focus:ring-purple-600"
+                  className="w-full px-4 py-3 rounded-md bg-white text-black border border-black focus:outline-none focus:ring-2 focus:ring-black-600"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -278,18 +278,18 @@ const Login = () => {
                 <input
                   type="password"
                   id="newPassword"
-                  className="w-full px-4 py-3 rounded-md bg-white text-black border-none focus:outline-none focus:ring-2 focus:ring-purple-600"
+                  className="w-full px-4 py-3 rounded-md bg-white text-black border border-black focus:outline-none focus:ring-2 focus:ring-black-600"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
               </div>
               <div className="mb-6">
-                <label htmlFor="confirmNewPassword" className="block text-white mb-2">Confirm New Password</label>
+                <label htmlFor="confirmNewPassword" className="block text-black mb-2">Confirm New Password</label>
                 <input
                   type="password"
                   id="confirmNewPassword"
-                  className="w-full px-4 py-3 rounded-md bg-white text-black border-none focus:outline-none focus:ring-2 focus:ring-purple-600"
+                  className="w-full px-4 py-3 rounded-md bg-white text-black border border-black focus:outline-none focus:ring-2 focus:ring-black-600"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
@@ -297,7 +297,7 @@ const Login = () => {
               </div>
               <button
                 type="submit"
-                className="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-md transition-colors whitespace-nowrap cursor-pointer flex justify-center items-center"
+                className="w-full py-3 bg-black hover:bg-gray-700 text-white rounded-md transition-colors whitespace-nowrap cursor-pointer flex justify-center items-center"
                 disabled={isLoading}
               >
                 {isLoading ? (
@@ -305,11 +305,11 @@ const Login = () => {
                 ) : null}
                 Reset Password
               </button>
-              <div className="mt-6 text-center text-white">
+              <div className="mt-6 text-center text-black">
                 Remember password?{' '}
                 <button
                   type="button"
-                  className="text-purple-600 hover:text-purple-400 transition-colors cursor-pointer"
+                  className="text-black hover:text-gray-700 transition-colors cursor-pointer"
                   onClick={() => {
                     resetMessages();
                     setActiveTab('login');
