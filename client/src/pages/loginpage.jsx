@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { login, signup, forgotPassword } from '../api/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
@@ -31,7 +32,7 @@ const Login = () => {
       localStorage.setItem('user', JSON.stringify(userData));
       
       // Redirect to homepage after successful login
-      navigate('/');
+      navigate('/homepage');
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed. Please check your credentials.');
     } finally {
@@ -40,34 +41,42 @@ const Login = () => {
   };
 
   const handleSignup = async (e) => {
-    e.preventDefault();
-    resetMessages();
-    
-    if (password !== confirmPassword) {
-      setError('Passwords do not match');
-      return;
-    }
-    
-    setIsLoading(true);
-    
-    try {
-      const userData = await signup({ 
-        name: fullName,
-        email, 
-        password 
-      });
-      
-      // Store user data in localStorage
-      localStorage.setItem('user', JSON.stringify(userData));
-      
-      // Redirect to homepage after successful signup
-      navigate('/');
-    } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed. Please try again.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  e.preventDefault();
+  resetMessages();
+
+  if (password.length < 6) {
+    setError('Password must be at least 6 characters long');
+    return;
+  }
+
+  if (password !== confirmPassword) {
+    setError('Passwords do not match');
+    return;
+  }
+
+  setIsLoading(true);
+
+  try {
+    const userData = await signup({
+      name: fullName,
+      email,
+      password
+    });
+
+    setSuccessMessage('Signup successful! Please log in.');
+    setActiveTab('login');
+
+    setFullName('');
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
+  } catch (err) {
+    setError(err.response?.data?.message || 'Registration failed. Please try again.');
+  } finally {
+    setIsLoading(false);
+  }
+};
+
 
   const handleForgotPassword = async (e) => {
     e.preventDefault();
