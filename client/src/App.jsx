@@ -1,9 +1,18 @@
 import React from "react";
 import {AnimatePresence} from "framer-motion";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Login from "./pages/loginpage";
 import Homepage from "./pages/homepage";
 import Formpage from "./pages/formpage";
+
+// Custom query param handler
+const HomepageWithToast = () => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const action = queryParams.get('action');
+  
+  return <Homepage initialAction={action} />;
+};
 
 //Protected Route
 const ProtectedRoute = ({ children }) => {
@@ -15,7 +24,7 @@ const ProtectedRoute = ({ children }) => {
     return <Navigate to="/login" />;
   }
   
-  // If authenticated, error
+  // If authenticated, render children
   return children;
 };
 
@@ -25,11 +34,19 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route 
           path="/homepage" 
           element={
             <ProtectedRoute>
-              <Homepage />
+              <HomepageWithToast />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/formpage" 
+          element={
+            <ProtectedRoute>
               <Formpage />
             </ProtectedRoute>
           } 
