@@ -1,31 +1,29 @@
 import React from "react";
-import {AnimatePresence} from "framer-motion";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 import Homepage from "./pages/homepage";
 import Formpage from "./pages/formpage";
 
-const App = () => {
+// Wrap routes with AnimatePresence
+const AnimatedRoutes = () => {
+  const location = useLocation();
+  
   return (
-    <AnimatePresence mode={"wait"}>
-    <Router>
-      <Routes>
-        <Route 
-          path="/" 
-          element={
-              <Homepage />
-          } 
-        />
-        <Route 
-          path="/formpage" 
-          element={
-              <Formpage />
-          } 
-        />
-        <Route path="*" element={<Navigate to="/" />} />
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/formpage" element={<Formpage />} />
       </Routes>
-    </Router>
     </AnimatePresence>
   );
-}
+};
+
+const App = () => {
+  return (
+    <Router>
+      <AnimatedRoutes />
+    </Router>
+  );
+};
 
 export default App;
