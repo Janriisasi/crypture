@@ -176,7 +176,7 @@ export default function Homepage({ initialAction }) {
           <div className="mb-6 md:mb-8">
             <div className="text-4xl md:text-6xl font-bold flex items-center justify-center">
               {/* Replace this with your own image */}
-              <img src="/src/assets/Logo.svg" alt="cryptore logo" className="h-16 md:h-24" />
+              <img src="./public/Logo.svg" alt="crypture logo" className="h-16 md:h-24" />
             </div>
           </div>
 
