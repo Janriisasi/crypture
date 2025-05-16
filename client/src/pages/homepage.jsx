@@ -1,11 +1,12 @@
 import React from 'react';
 import {motion} from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
 import { Search, Plus, MoreVertical, Eye, Copy, Pin, Edit, Trash2, Check, X } from 'lucide-react';
 
 export default function Homepage({ initialAction }) {
   const [hoveredCard, setHoveredCard] = useState(null);
+  const location = useLocation();
   const [openMenu, setOpenMenu] = useState(null);
   const [toast, setToast] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -23,48 +24,18 @@ export default function Homepage({ initialAction }) {
   useEffect(() => {
     loadPasswordEntries();
     
-    // Show toast if coming from form with action parameter
-    if (initialAction === 'added') {
+    // Show toast if coming from form
+    if (location.state?.action === 'added') {
       setToast({
         message: 'Password added successfully!',
         type: 'success'
       });
-    } else if (initialAction === 'edited') {
-      setToast({
-        message: 'Password updated successfully!',
-        type: 'success'
-      });
     }
-  }, [initialAction]);
-  
-  // Function to load password entries for the current user
+  }, [location]);
+
   const loadPasswordEntries = () => {
-    if (!currentUser || !currentUser.email) return;
-    
-    const allPasswords = JSON.parse(localStorage.getItem('passwords')) || [];
-    
-    // Filter passwords for current user
-    const userPasswords = allPasswords.filter(entry => 
-      entry.userEmail === currentUser.email
-    );
-    
-    // Assign random colors to entries if they don't have colors
-    const colorOptions = [
-      'border-indigo-200 bg-indigo-50',
-      'border-green-200 bg-green-50',
-      'border-yellow-200 bg-yellow-50',
-      'border-red-200 bg-red-50',
-      'border-blue-200 bg-blue-50',
-      'border-purple-200 bg-purple-50'
-    ];
-    
-    const enrichedPasswords = userPasswords.map(entry => ({
-      ...entry,
-      color: entry.color || colorOptions[Math.floor(Math.random() * colorOptions.length)],
-      pinned: entry.pinned || false
-    }));
-    
-    setPasswordEntries(enrichedPasswords);
+    const passwords = JSON.parse(localStorage.getItem('passwords')) || [];
+    setPasswordEntries(passwords);
   };
 
   // Handle outside click to close menu
@@ -343,7 +314,7 @@ export default function Homepage({ initialAction }) {
               <h3 className="text-xl font-medium text-gray-700 mb-2">No passwords found</h3>
               <p className="text-gray-500 text-center mb-6">Add your first password to remember</p>
               <button 
-                className="bg-black text-white px-4 py-2 rounded-md font-medium flex items-center gap-2"
+                className="bg-black text-white px-4 py-2 rounded-md font-medium flex items-center gap-2 cursor-pointer hover:bg-gray-800 transition-colors duration-200"
                 onClick={handleAddButtonClick}
               >
                 <Plus size={18} />
@@ -365,7 +336,7 @@ export default function Homepage({ initialAction }) {
             <span>{toast.message}</span>
           </div>
         )}
-        
+
       </div>
     </motion.div>
   );
