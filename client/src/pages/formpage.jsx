@@ -2,11 +2,13 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import { Eye } from 'lucide-react';
 
 export default function Formpage() {
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
   const [entryId, setEntryId] = useState(null);
+   const [showPassword, setShowPassword] = useState(false);
 
   // Add default user
   const [currentUser] = useState({
@@ -51,37 +53,37 @@ export default function Formpage() {
   }, []);
 
   const handleAdd = () => {
-    if (!formData.website || !formData.email || !formData.password) {
-      alert("Please fill in all fields");
-      return;
-    }
+  if (!formData.website || !formData.email || !formData.password) {
+    alert("Please fill in all fields");
+    return;
+  }
 
-    const existing = JSON.parse(localStorage.getItem("passwords")) || [];
+  const existing = JSON.parse(localStorage.getItem("passwords")) || [];
 
-    if (isEditing) {
-      const updated = existing.map(entry => 
-        entry.id === entryId ? 
-        { ...entry, ...formData } : entry
-      );
-      localStorage.setItem("passwords", JSON.stringify(updated));
-      setIsEditing(false);
-      setEntryId(null);
-      navigate('/');
-    } else {
-      const newEntry = {
-        ...formData,
-        id: Date.now(),
-        userEmail: currentUser.email,
-        pinned: false,
-        createdAt: new Date().toISOString()
-      };
-      const updated = [...existing, newEntry];
-      localStorage.setItem("passwords", JSON.stringify(updated));
-      navigate('/');
-    }
+  if (isEditing) {
+    const updated = existing.map(entry => 
+      entry.id === entryId ? 
+      { ...entry, ...formData } : entry
+    );
+    localStorage.setItem("passwords", JSON.stringify(updated));
+    setIsEditing(false);
+    setEntryId(null);
+    navigate('/', { state: { action: 'edited' } }); // Add state here
+  } else {
+    const newEntry = {
+      ...formData,
+      id: Date.now(),
+      userEmail: currentUser.email,
+      pinned: false,
+      createdAt: new Date().toISOString()
+    };
+    const updated = [...existing, newEntry];
+    localStorage.setItem("passwords", JSON.stringify(updated));
+    navigate('/', { state: { action: 'added' } }); // Add state here
+  }
 
-    setFormData({ website: '', email: '', password: '', color: '' });
-  };
+  setFormData({ website: '', email: '', password: '', color: '' });
+};
 
   const handleCancel = () => {
     setIsEditing(false);
@@ -130,17 +132,25 @@ export default function Formpage() {
             </div>
 
             {/* Password - Third */}
-            <div className="w-full">
+            <div className="w-full relative">
               <label className="block text-base sm:text-lg font-medium mb-2">Password</label>
-              <input 
-                type="password"  
-                value={formData.password}
-                onChange={(e) => setFormData({...formData, password: e.target.value})}
-                className="w-full p-3 border border-gray-300 rounded-md focus:outline-black"
-                placeholder="Your password"
-              />
+              <div className="relative">
+                <input 
+                  type={showPassword ? "text" : "password"}
+                  value={formData.password}
+                  onChange={(e) => setFormData({...formData, password: e.target.value})}
+                  className="w-full p-3 border border-gray-300 rounded-md focus:outline-black pr-10"
+                  placeholder="Your password"
+                />
+                <button 
+                  type="button"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 cursor-pointer"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  <Eye size={24} />
+                </button>
+              </div>
             </div>
-
             {/* Color Selection - Fourth */}
             <div className="w-full">
               <label className="block text-base sm:text-lg font-medium mb-2">Card Color</label>

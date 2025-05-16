@@ -53,13 +53,25 @@ export default function Homepage({ initialAction }) {
 
   // Handle toast timeout
   useEffect(() => {
-    if (toast) {
-      const timer = setTimeout(() => {
-        setToast(null);
-      }, 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [toast]);
+  loadPasswordEntries();
+  
+  // Show toast based on navigation state
+  if (location.state?.action === 'added') {
+    setToast({
+      message: 'Password added successfully!',
+      type: 'success'
+    });
+    // Clear the state after showing toast
+    window.history.replaceState({}, document.title);
+  } else if (location.state?.action === 'edited') {
+    setToast({
+      message: 'Password updated successfully!',
+      type: 'success'
+    });
+    // Clear the state after showing toast
+    window.history.replaceState({}, document.title);
+  }
+}, [location]);
 
   // Copy password to clipboard
   const copyPassword = (password) => {
