@@ -365,20 +365,7 @@ export default function Homepage({ initialAction }) {
             <span>{toast.message}</span>
           </div>
         )}
-
-        {/* Avatar in top right with dropdown */}
-        <div className="absolute top-4 md:top-6 right-4 md:right-6">
-          <div 
-            className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-black flex items-center justify-center text-white cursor-pointer relative"
-            onClick={handleLogout}
-            title="Logout"
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="12" cy="8" r="5" />
-              <path d="M20 21v-2a7 7 0 0 0-14 0v2" />
-            </svg>
-          </div>
-        </div>
+        
       </div>
     </motion.div>
   );
