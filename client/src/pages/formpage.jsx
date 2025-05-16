@@ -7,8 +7,11 @@ export default function Formpage() {
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
   const [entryId, setEntryId] = useState(null);
-  
-  const currentUser = JSON.parse(localStorage.getItem('user'));
+
+  // Add default user
+  const [currentUser] = useState({
+    email: 'user@example.com' // Default email for all entries
+  });
 
   const colorOptions = [
     'border-indigo-200 bg-indigo-50',
@@ -69,7 +72,8 @@ export default function Formpage() {
         ...formData,
         id: Date.now(),
         userEmail: currentUser.email,
-        pinned: false
+        pinned: false,
+        createdAt: new Date().toISOString()
       };
       const updated = [...existing, newEntry];
       localStorage.setItem("passwords", JSON.stringify(updated));
