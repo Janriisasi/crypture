@@ -337,6 +337,11 @@ export default function Homepage({ initialAction }) {
           </div>
         )}
 
+        <div className="md:h-14 text-center text-gray-500 cursor-pointer">
+          <div className="text-sm md:text-base">
+          <p>made by <a href="https://github.com/Janriisasi">janriisasi</a></p>
+        </div>
+        </div>
       </div>
     </motion.div>
   );
