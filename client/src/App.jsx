@@ -1,6 +1,6 @@
 import React from "react";
 import {AnimatePresence} from "framer-motion";
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Homepage from "./pages/homepage";
 import Formpage from "./pages/formpage";
 
@@ -18,7 +18,6 @@ const App = () => {
         <Route 
           path="/formpage" 
           element={
-
               <Formpage />
           } 
         />
